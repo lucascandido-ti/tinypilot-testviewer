@@ -80,6 +80,11 @@ wget \
   https://github.com/mikefarah/yq/releases/download/v4.35.1/yq_linux_arm \
   --output-document="${BUNDLE_DIR}/yq"
 
+# Download testgadget-raspi Debian package.
+wget \
+  --directory-prefix="${BUNDLE_DIR}" \
+  https://github.com/gabrielkim13/tinypilot-testviewer/releases/download/testgadget-raspi_0.1.0/testgadget-raspi_0.1.0_armhf.deb
+
 # Generate tarball bundle and meta file.
 mkdir -p "${OUTPUT_DIR}"
 ls -lahR "${BUNDLE_DIR}" > "${OUTPUT_DIR}/files.txt"

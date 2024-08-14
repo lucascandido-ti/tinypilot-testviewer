@@ -59,6 +59,10 @@ readonly USTREAMER_DEBIAN_PACKAGE
 TINYPILOT_DEBIAN_PACKAGE="$(ls tinypilot*.deb)"
 readonly TINYPILOT_DEBIAN_PACKAGE
 
+# Get the filename of the testgadget-raspi Debian package.
+TESTGADGET_RASPI_DEBIAN_PACKAGE="$(ls testgadget-raspi*.deb)"
+readonly TESTGADGET_RASPI_DEBIAN_PACKAGE
+
 # Update apt package index files, allowing the apt repos to change suite name.
 # See https://github.com/tiny-pilot/tinypilot/issues/764
 apt-get update --allow-releaseinfo-change-suite
@@ -66,8 +70,12 @@ apt-get update --allow-releaseinfo-change-suite
 apt-get install -y \
   "./${JANUS_DEBIAN_PACKAGE}" \
   "./${USTREAMER_DEBIAN_PACKAGE}" \
-  "./${TINYPILOT_DEBIAN_PACKAGE}"
+  "./${TINYPILOT_DEBIAN_PACKAGE}" \
+  "./${TESTGADGET_RASPI_DEBIAN_PACKAGE}"
 
 # Install yq.
 mv yq /usr/bin/yq
 chmod 0755 /usr/bin/yq
+
+# Enable testgadget-raspi service.
+sudo systemctl enable testgadget-raspi
