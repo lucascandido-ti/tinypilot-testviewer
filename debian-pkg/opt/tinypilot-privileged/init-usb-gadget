@@ -155,6 +155,110 @@ echo -ne \\xC0           # END_COLLECTION
 } >> "$D"
 cp "$D" "${USB_MOUSE_FUNCTIONS_DIR}/report_desc"
 
+# SoC
+mkdir -p "$USB_SOC_FUNCTIONS_DIR"
+echo 0 > "${USB_SOC_FUNCTIONS_DIR}/protocol"
+echo 0 > "${USB_SOC_FUNCTIONS_DIR}/subclass"
+echo 1020 > "${USB_SOC_FUNCTIONS_DIR}/report_length"  # Max report length + 1 (for report ID)
+
+D=$(mktemp)
+{
+echo -ne \\x05\\x11       # UsagePage(SoC[0x0011])
+echo -ne \\x09\\x01       # UsageId(SocControl[0x0001])
+echo -ne \\xA1\\x01       # Collection(Application)
+echo -ne \\x85\\x01       #   ReportId(1)
+echo -ne \\x09\\x02       #   UsageId(FirmwareTransfer[0x0002])
+echo -ne \\xA1\\x02       #   Collection(Logical)
+echo -ne \\x09\\x03       #     UsageId(FirmwareFileId[0x0003])
+echo -ne \\x15\\x80       #     LogicalMinimum(-128)
+echo -ne \\x25\\x7F       #     LogicalMaximum(127)
+echo -ne \\x95\\x10       #     ReportCount(16)
+echo -ne \\x75\\x08       #     ReportSize(8)
+echo -ne \\x91\\x02       #     Output(Data, Variable, Absolute, NoWrap, Linear, PreferredState, NoNullPosition, NonVolatile, BitField)
+echo -ne \\xC0            #   EndCollection()
+echo -ne \\x85\\x02       #   ReportId(2)
+echo -ne \\x09\\x02       #   UsageId(FirmwareTransfer[0x0002])
+echo -ne \\xA1\\x02       #   Collection(Logical)
+echo -ne \\x09\\x03       #     UsageId(FirmwareFileId[0x0003])
+echo -ne \\x81\\x02       #     Input(Data, Variable, Absolute, NoWrap, Linear, PreferredState, NoNullPosition, BitField)
+echo -ne \\x09\\x09       #     UsageId(FileTransferStop[0x0009])
+echo -ne \\x15\\x00       #     LogicalMinimum(0)
+echo -ne \\x25\\x01       #     LogicalMaximum(1)
+echo -ne \\x95\\x01       #     ReportCount(1)
+echo -ne \\x81\\x02       #     Input(Data, Variable, Absolute, NoWrap, Linear, PreferredState, NoNullPosition, BitField)
+echo -ne \\xC0            #   EndCollection()
+echo -ne \\x85\\x03       #   ReportId(3)
+echo -ne \\x09\\x02       #   UsageId(FirmwareTransfer[0x0002])
+echo -ne \\xA1\\x02       #   Collection(Logical)
+echo -ne \\x09\\x03       #     UsageId(FirmwareFileId[0x0003])
+echo -ne \\x15\\x80       #     LogicalMinimum(-128)
+echo -ne \\x25\\x7F       #     LogicalMaximum(127)
+echo -ne \\x95\\x10       #     ReportCount(16)
+echo -ne \\x91\\x02       #     Output(Data, Variable, Absolute, NoWrap, Linear, PreferredState, NoNullPosition, NonVolatile, BitField)
+echo -ne \\x09\\x08       #     UsageId(FilePayloadContainsLastBytes[0x0008])
+echo -ne \\x15\\x00       #     LogicalMinimum(0)
+echo -ne \\x25\\x01       #     LogicalMaximum(1)
+echo -ne \\x95\\x01       #     ReportCount(1)
+echo -ne \\x91\\x02       #     Output(Data, Variable, Absolute, NoWrap, Linear, PreferredState, NoNullPosition, NonVolatile, BitField)
+echo -ne \\x09\\x07       #     UsageId(FilePayloadSizeInBytes[0x0007])
+echo -ne \\x26\\xE8\\x03  #     LogicalMaximum(1,000)
+echo -ne \\x75\\x10       #     ReportSize(16)
+echo -ne \\x91\\x02       #     Output(Data, Variable, Absolute, NoWrap, Linear, PreferredState, NoNullPosition, NonVolatile, BitField)
+echo -ne \\x09\\x06       #     UsageId(FilePayload[0x0006])
+echo -ne \\x26\\xFF\\x00  #     LogicalMaximum(255)
+echo -ne \\x96\\xE8\\x03  #     ReportCount(1000)
+echo -ne \\x75\\x08       #     ReportSize(8)
+echo -ne \\x91\\x02       #     Output(Data, Variable, Absolute, NoWrap, Linear, PreferredState, NoNullPosition, NonVolatile, BitField)
+echo -ne \\xC0            #   EndCollection()
+echo -ne \\x85\\x01       #   ReportId(1)
+echo -ne \\x09\\x02       #   UsageId(FirmwareTransfer[0x0002])
+echo -ne \\xA1\\x02       #   Collection(Logical)
+echo -ne \\x09\\x03       #     UsageId(FirmwareFileId[0x0003])
+echo -ne \\x15\\x80       #     LogicalMinimum(-128)
+echo -ne \\x25\\x7F       #     LogicalMaximum(127)
+echo -ne \\x95\\x10       #     ReportCount(16)
+echo -ne \\x81\\x02       #     Input(Data, Variable, Absolute, NoWrap, Linear, PreferredState, NoNullPosition, BitField)
+echo -ne \\xC0            #   EndCollection()
+echo -ne \\x85\\x02       #   ReportId(2)
+echo -ne \\x09\\x02       #   UsageId(FirmwareTransfer[0x0002])
+echo -ne \\xA1\\x02       #   Collection(Logical)
+echo -ne \\x09\\x03       #     UsageId(FirmwareFileId[0x0003])
+echo -ne \\x91\\x02       #     Output(Data, Variable, Absolute, NoWrap, Linear, PreferredState, NoNullPosition, NonVolatile, BitField)
+echo -ne \\x09\\x09       #     UsageId(FileTransferStop[0x0009])
+echo -ne \\x15\\x00       #     LogicalMinimum(0)
+echo -ne \\x25\\x01       #     LogicalMaximum(1)
+echo -ne \\x95\\x01       #     ReportCount(1)
+echo -ne \\x91\\x02       #     Output(Data, Variable, Absolute, NoWrap, Linear, PreferredState, NoNullPosition, NonVolatile, BitField)
+echo -ne \\xC0            #   EndCollection()
+echo -ne \\x85\\x03       #   ReportId(3)
+echo -ne \\x09\\x02       #   UsageId(FirmwareTransfer[0x0002])
+echo -ne \\xA1\\x02       #   Collection(Logical)
+echo -ne \\x09\\x03       #     UsageId(FirmwareFileId[0x0003])
+echo -ne \\x15\\x80       #     LogicalMinimum(-128)
+echo -ne \\x25\\x7F       #     LogicalMaximum(127)
+echo -ne \\x95\\x10       #     ReportCount(16)
+echo -ne \\x81\\x02       #     Input(Data, Variable, Absolute, NoWrap, Linear, PreferredState, NoNullPosition, BitField)
+echo -ne \\x09\\x08       #     UsageId(FilePayloadContainsLastBytes[0x0008])
+echo -ne \\x15\\x00       #     LogicalMinimum(0)
+echo -ne \\x25\\x01       #     LogicalMaximum(1)
+echo -ne \\x95\\x01       #     ReportCount(1)
+echo -ne \\x81\\x02       #     Input(Data, Variable, Absolute, NoWrap, Linear, PreferredState, NoNullPosition, BitField)
+echo -ne \\x09\\x07       #     UsageId(FilePayloadSizeInBytes[0x0007])
+echo -ne \\x15\\x01       #     LogicalMinimum(1)
+echo -ne \\x26\\xE8\\x03  #     LogicalMaximum(1,000)
+echo -ne \\x75\\x10       #     ReportSize(16)
+echo -ne \\x81\\x02       #     Input(Data, Variable, Absolute, NoWrap, Linear, PreferredState, NoNullPosition, BitField)
+echo -ne \\x09\\x06       #     UsageId(FilePayload[0x0006])
+echo -ne \\x15\\x00       #     LogicalMinimum(0)
+echo -ne \\x26\\xFF\\x00  #     LogicalMaximum(255)
+echo -ne \\x96\\xE8\\x03  #     ReportCount(1000)
+echo -ne \\x75\\x08       #     ReportSize(8)
+echo -ne \\x81\\x02       #     Input(Data, Variable, Absolute, NoWrap, Linear, PreferredState, NoNullPosition, BitField)
+echo -ne \\xC0            #   EndCollection()
+echo -ne \\xC0            # EndCollection()
+} >> "$D"
+cp "$D" "${USB_SOC_FUNCTIONS_DIR}/report_desc"
+
 mkdir -p "${USB_CONFIG_DIR}"
 echo 250 > "${USB_CONFIG_DIR}/MaxPower"
 
@@ -165,5 +269,6 @@ echo "Config ${USB_CONFIG_INDEX}: ECM network" > "${CONFIGS_STRINGS_DIR}/configu
 ln -s "${USB_RNDIS_FUNCTIONS_DIR}" "${USB_CONFIG_DIR}/"
 ln -s "${USB_KEYBOARD_FUNCTIONS_DIR}" "${USB_CONFIG_DIR}/"
 ln -s "${USB_MOUSE_FUNCTIONS_DIR}" "${USB_CONFIG_DIR}/"
+ln -s "${USB_SOC_FUNCTIONS_DIR}" "${USB_CONFIG_DIR}/"
 
 usb_gadget_activate
