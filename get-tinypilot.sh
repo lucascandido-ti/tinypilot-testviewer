@@ -130,7 +130,7 @@ sudo mkdir "${TMPDIR}"
 readonly BUNDLE_FILE="${INSTALLER_DIR}/bundle.tgz"
 
 # Download tarball to RAMdisk.
-HTTP_CODE="$(curl https://github.com/lucascandido-ti/tinypilot-testviewer/releases/download/v1.0.0/v1.0.0.tgz \
+HTTP_CODE="$(curl https://github.com/lucascandido-ti/tinypilot-testviewer/releases/download/v1.0.1/v1.0.1.tgz \
   --location \
   --output "${BUNDLE_FILE}" \
   --write-out '%{http_code}' \
