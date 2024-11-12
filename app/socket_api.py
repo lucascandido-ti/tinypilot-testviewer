@@ -13,7 +13,7 @@ from request_parsers import mouse_event as mouse_event_request
 
 logger = logging.getLogger(__name__)
 
-socketio = flask_socketio.SocketIO()
+socketio = flask_socketio.SocketIO(cors_allowed_origins="*")
 socketio.on_namespace(update_logs.Namespace('/updateLogs'))
 
 
